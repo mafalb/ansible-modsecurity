@@ -1,0 +1,5 @@
+---
+
+modsecurity:
+  crs: true
+  SecRuleEngine: DetectionOnly

@@ -1,0 +1,20 @@
+---
+
+- name: mod_security is present
+  package:
+    name: mod_security
+    state: present
+  notify: reload apache
+
+- name: mod_security rules are present
+  package:
+    name: mod_security_crs
+    state: present
+  when: modsecurity.crs
+  notify: reload apache
+
+- name: mod_security.conf
+  template:
+    src: mod_security.conf.j2
+    dest: /etc/httpd/conf.d/mod_security.conf
+  notify: reload apache
