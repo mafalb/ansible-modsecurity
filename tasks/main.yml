@@ -15,6 +15,9 @@
 
 - name: mod_security.conf
   template:
-    src: mod_security.conf.j2
+    src: "{{ item }}"
     dest: /etc/httpd/conf.d/mod_security.conf
   notify: reload apache
+  with_first_found:
+    - mod_security.conf-{{ ansible_distribution }}{{ ansible_distribution_major_version }}.j2
+    - mod_security.conf.j2
